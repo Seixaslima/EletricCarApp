@@ -3,5 +3,13 @@
     <string name="Title">Eletric Car</string>
     <string name="carros">Carros</string>
     <string name="favoritos">Favoritos</string>
+    <string name="preco">Preço</string>
+    <string name="bateria">Bateria</string>
+    <string name="potencia">Potência</string>
+    <string name="recarga">Recarga</string>
+    <string name="preco_do_kwh">Preço do KWh</string>
+    <string name="km_percorrido">Km percorrido</string>
+    <string name="calcular_autonomia">Calcular Autonomia</string>
+
 
 </resources>

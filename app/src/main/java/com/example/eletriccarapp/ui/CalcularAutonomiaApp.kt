@@ -1,5 +1,6 @@
 package com.example.eletriccarapp.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -21,7 +22,13 @@ class CalcularAutonomiaApp : AppCompatActivity() {
 
         getCampos()
         setListener()
+        getCachedCalc()
 
+    }
+
+    private fun getCachedCalc() {
+        val valorCalculado = getSharesPref()
+        tvResultado.text = valorCalculado.toString()
     }
 
     fun getCampos() {
@@ -47,6 +54,20 @@ class CalcularAutonomiaApp : AppCompatActivity() {
         var valorResultado =  valorKwh / valorKmPercorrido
 
         tvResultado.text = valorResultado.toString()
+        saveSharedPref(valorResultado)
+    }
+
+    fun saveSharedPref (valor: Float) {
+        val sharedPref = getPreferences(Context.MODE_PRIVATE) ?: return
+        with(sharedPref.edit()) {
+            putFloat(getString(R.string.saved_calc), valor)
+            apply()
+        }
+    }
+
+    fun getSharesPref (): Float {
+        val sharedPref = getPreferences(Context.MODE_PRIVATE)
+        return sharedPref.getFloat(getString(R.string.saved_calc), 0.0f)
     }
 
 

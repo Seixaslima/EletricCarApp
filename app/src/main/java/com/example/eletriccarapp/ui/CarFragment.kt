@@ -1,5 +1,6 @@
 package com.example.eletriccarapp.ui
 
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
@@ -20,6 +21,15 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eletriccarapp.R
 import com.example.eletriccarapp.data.CarsApi
+import com.example.eletriccarapp.data.local.CarRepository
+import com.example.eletriccarapp.data.local.CarsDbHelper
+import com.example.eletriccarapp.data.local.carrosContract
+import com.example.eletriccarapp.data.local.carrosContract.CarEntry.COLUMN_NAME_BATERIA
+import com.example.eletriccarapp.data.local.carrosContract.CarEntry.COLUMN_NAME_POTENCIA
+import com.example.eletriccarapp.data.local.carrosContract.CarEntry.COLUMN_NAME_PRECO
+import com.example.eletriccarapp.data.local.carrosContract.CarEntry.COLUMN_NAME_RECARGA
+import com.example.eletriccarapp.data.local.carrosContract.CarEntry.COLUMN_NAME_URL_PHOTO
+import com.example.eletriccarapp.data.local.carrosContract.CarEntry.TABLE_NAME
 import com.example.eletriccarapp.domain.Carro
 import com.example.eletriccarapp.ui.adapter.CarAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -126,6 +136,9 @@ class CarFragment : Fragment() {
            adapter = newAdapter
            visibility = View.VISIBLE
        }
+       newAdapter.carItemLister = {carro ->
+           CarRepository(requireContext()).save(carro)
+       }
    }
 
     fun setListener() {
@@ -211,7 +224,6 @@ class CarFragment : Fragment() {
                     val model = Carro(
                         id = id.toInt(),
                         preco= preco,
-                        bateria = bateria,
                         potencia = potencia,
                         recarga = recarga,
                         urlPhoto = urlPhoto
@@ -234,4 +246,6 @@ class CarFragment : Fragment() {
 
 
     }
+
+
 }

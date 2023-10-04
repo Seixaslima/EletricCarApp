@@ -224,6 +224,7 @@ class CarFragment : Fragment() {
                     val model = Carro(
                         id = id.toInt(),
                         preco= preco,
+                        bateria = bateria,
                         potencia = potencia,
                         recarga = recarga,
                         urlPhoto = urlPhoto
